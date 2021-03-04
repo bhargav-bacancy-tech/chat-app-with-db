@@ -1,5 +1,4 @@
 var express = require('express')
-var mongoose = require('mongoose')
 var req = require('request')
 var schema = require('../model/userSchema.js')
 var router = express.Router()
