@@ -11,6 +11,7 @@ const {Secret, jwtSecret} = require("../config/public");
 //var userModel = mongoose.model('user_details',userSchema)
 
 var addUser = async function(req, res){
+    console.log("Add user called");
     var {name,user_name,password}= req.body;
     var check=userModel.findOne({user_name});
     await check.exec((error,data)=>{
@@ -105,9 +106,11 @@ var getMyroom= async function(req,res){
         }
     })
 }
-var getParticularUser = async function(req,res,auth){
+var getParticularUser = async function(req,res){
+    console.log("Getting Particular user");
+    console.log(req.body);
     var {user_name,password}= req.body;
-
+    console.log(req.body);
     var check=userModel.findOne({user_name})
     await check.exec((err, data) => {
         if (err) {
@@ -118,10 +121,11 @@ var getParticularUser = async function(req,res,auth){
             return res.status(400).send(error);
         } 
         else {
+            console.log(data);
             if (data == null || data.length == 0) {
                 var error = {
                     is_error: true,
-                    message: "Username or Password invalid",
+                    message: "Username  invalid",
                 };
                 return res.status(500).send(error);
             } 
@@ -149,7 +153,7 @@ var getParticularUser = async function(req,res,auth){
                 else {
                     var error = {
                         is_error: true,
-                        message: "Username or Password invalid",
+                        message: "Password invalid",
                     };
                     return res.status(500).send(error);
                 }

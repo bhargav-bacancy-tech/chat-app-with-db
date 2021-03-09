@@ -8,7 +8,7 @@ var {addUser,getUser,getMyroom,getParticularUser,updateName,changePassword,delet
 router.post('/add',addUser);
 router.get('/get',getUser);
 router.get('/getMyroom',getMyroom);
-router.get('/getparticular',getParticularUser);
+router.post('/getparticular',getParticularUser);
 router.post('/updateName',updateName);
 router.post('/changePassword',changePassword);
 router.post('/delete',deleteUser);

@@ -1,6 +1,6 @@
 var express = require('express')
 var url = require('../connection');
-var {ObjectId }= require('bson');
+var {ObjectId, Timestamp }= require('bson');
 var mongoose = require('mongoose')
 //mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
 var roomSchema =new mongoose.Schema({
@@ -21,7 +21,24 @@ var roomSchema =new mongoose.Schema({
         type: Array,
         required: false
     },
-    //salary : Number,
+    messages:[
+        {
+            message:String
+        },
+        {
+            message_id:ObjectId
+        },
+        {
+            sendby:ObjectId
+        },
+        {
+            senttime: { type: Date, default: Date.now}
+        }
+        
+    ]
+
+    
+  
 })
 var chatroom_exports = mongoose.model("chatroom_details", roomSchema);
 
