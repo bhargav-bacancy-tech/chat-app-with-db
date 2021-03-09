@@ -94,14 +94,14 @@ var getParticularRoom = async function(req,res){
                 is_error: true,
                 message: 'cannot find chat room currently with this name '
             }   
-            return res.send(404).send(error);
+            return res.status(404).send(error);
         }    
     })
 
 }
 var joinRoom = async function(req,res){
     var {user_id,room_id}= req.body;
-    var check=roomModel.findOneAndUpdate({_id:room_id},{$push :{users:ObjectId(user_id)},})
+    var check=roomModel.findOneAndUpdate({_id:room_id,users:{$nin:[ObjectId(user_id)]}},{$push :{users:ObjectId(user_id)},})
     await check.exec((err,data)=>{
         if(err){
             var error={
@@ -236,7 +236,7 @@ var updateRoom = async function(req,res){
 }
 var leaveRoom = async function(req,res){
     var {user_id,room_id}= req.body;
-    var check=roomModel.findOneAndUpdate({_id:room_id},{$pull :{users:ObjectId(user_id)},})
+    var check=roomModel.findOneAndUpdate({_id:room_id,users:{$in:[ObjectId(user_id)]}},{$pull :{users:ObjectId(user_id)},})
     await check.exec((err,data)=>{
         if(err){
             var error={

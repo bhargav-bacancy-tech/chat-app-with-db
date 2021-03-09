@@ -23,22 +23,12 @@ var roomSchema =new mongoose.Schema({
     },
     messages:[
         {
-            message:String
-        },
-        {
-            message_id:ObjectId
-        },
-        {
-            sendby:ObjectId
-        },
-        {
+            message:String,
+            message_id: ObjectId,
+            sendby:ObjectId,
             senttime: { type: Date, default: Date.now}
         }
-        
     ]
-
-    
-  
 })
 var chatroom_exports = mongoose.model("chatroom_details", roomSchema);
 
